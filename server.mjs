@@ -35,7 +35,7 @@ const serveStatic = (staticPath) => async (req, res) => {
     if (fileExt === 'html') {
       data = `${data}
     <script>
-    let ws = new WebSocket('ws://' + window.location.host + '/path');
+    let ws = new WebSocket('ws://' + window.location.host);
     console.log('Live reload server connected');  
     ws.onmessage = (event) => {
       if (event.data === 'reload')  window.location.reload();
