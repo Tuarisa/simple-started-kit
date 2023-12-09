@@ -109,13 +109,13 @@ async function build() {
 
   // Empty dist directory first
   await deleteFolderRecursive(distDirectory);
-  await walkAndCopy(assetsDir, distDirectory, copyFile);
+  await walkAndCopy(assetsDir, distDirectory + '/assets', copyFile);
   await walkAndCopy(pagesDir, distDirectory, replaceComponents);
   
   // Watch file changes in assets
   fsOriginal.watch(assetsDir, { recursive: true }, async (eventType, filename) => {
     const sourcePath = join(assetsDir, filename);
-    const targetPath = join(distDirectory, filename);
+    const targetPath = join(distDirectory + '/assets', filename);
     try {
       await copyFile(sourcePath, targetPath);
     } catch (error) {
