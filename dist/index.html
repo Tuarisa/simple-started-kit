@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>WebSocket Test</title>
+    <title>Hello World Page</title>
+    <style>
+        #hello-world {
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello worlddfs</h1>
+    <div id="hello-world">Hello world!122</div>
+    <div>Good bye1</div>
+<div id="hello-world">Hello world!122</div>
+    <script>
+        document.getElementById('hello-world').addEventListener('click', function() {
+            var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            this.style.color = randomColor;
+        });
+    </script>
 </body>
 </html>

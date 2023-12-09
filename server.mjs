@@ -35,11 +35,20 @@ const serveStatic = (staticPath) => async (req, res) => {
     if (fileExt === 'html') {
       data = `${data}
     <script>
-    let ws = new WebSocket('ws://' + window.location.host);
-    console.log('Live reload server connected');  
-    ws.onmessage = (event) => {
-      if (event.data === 'reload')  window.location.reload();
-    };
+    function connect() {
+      let ws = new WebSocket('ws://' + window.location.host);
+      console.log('Live reload server connected');
+
+      ws.onmessage = (event) => {
+        if (event.data === 'reload') window.location.reload();
+      };
+
+      ws.onclose = () => {
+        console.log('Connection lost. Attempting to reconnect...');
+        setTimeout(connect, 5000);
+      };
+    }
+    connect();
     </script>`
     }
     res.writeHead(200, { ...HEADERS, 'Content-Type': mimeType });
